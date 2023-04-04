@@ -1,0 +1,19 @@
+{
+  "search":"Search",
+  "Add Manufacturer":  "Add Manufacturer",
+  "Manufacturers":"Manufacturers",
+  "nameEn":"Name in English",
+  "nameAr":"Name in Arabic",
+  "image":"Imagess",
+  "status":"Status",
+  "actions":"Actions",
+  "sort":"Sort",
+  "dashboard":"Dashboard",
+  "upimg":"UpLoad Image",
+  "update":"Update",
+  "deleteMsg":"Are you sure you want to delete this item?",
+  "accept":"Accept",
+  "cancel":"Cancel",
+  "item":"Item"
+
+}

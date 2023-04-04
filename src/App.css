@@ -1,0 +1,113 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+:root{
+  --body-color:#eeeeee;
+  --main-color:#ffffff;
+  --barside-color:#05050b;
+  --color-text:#242429;
+  --background-btn:#e7eef8;
+  --background-drop-item:#ffffffad;
+  --blur-color:#fffbfb8f;
+  --background-table:#ffffff;
+  --background-table-main-row:#dfe0e280;
+  --text-pagination:#242429;
+  --background-pagination:#dee2e6;
+  --border-pagination-btn:#24242900;
+
+}
+body.dark{
+  --body-color:#1e2026;
+  --main-color:#141519;
+  --barside-color:#05050b;
+  --color-text:#eeeeee;
+  --background-btn:#1f2128;
+  --background-drop-item:#0a0b0eb8;
+  --blur-color:#1010108f;
+  --background-table:#242731;
+  --background-table-main-row:#49505780;
+  --text-pagination:#dee2e6;
+  --background-pagination:#242429;
+  --border-pagination-btn:#96969665;
+
+}
+body{
+  background-color: var(--body-color);
+}
+.nav-item{
+  min-height: 0;
+  transition: 0.1s linear all;
+
+}
+.active-nav-item{
+  min-height: 80px;
+  transition: 0.2s linear all;
+
+}
+.table{
+
+}
+
+/* Set the width and height of the scrollbar */
+.table ::-webkit-scrollbar {
+  width: 5px;
+  height: 0px;
+}
+
+/* Style the track (the background of the scrollbar) */
+.table ::-webkit-scrollbar-track {
+  background: #b80b0b00;
+}
+
+/* Style the thumb (the moving part of the scrollbar) */
+.table ::-webkit-scrollbar-thumb {
+  background: #0e095300;
+  border-radius: 5px;
+}
+
+/* When the user hovers over the thumb */
+.table ::-webkit-scrollbar-thumb:hover {
+  background: #0e0101;
+}
+.paganation-btn{
+  padding:2px  8px;
+  min-width: 25px;
+  border: none;
+}
+
+.pagination {
+  justify-content: center;
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+}
+
+
+.pagination-item{
+  background-color: var(--background-pagination);
+  padding:0px  10px;
+  text-align: center;
+  border-left: 1px solid var(--border-pagination-btn);
+  /* min-width: 25px; */
+  color: var(--text-pagination);
+  display: flex;
+  align-items: center;
+}
+.nav-item{
+  font-size: 22px;
+}
+.navStart{
+  border-radius: 20px 0 0 20px;
+}
+.navEnd{
+  border-radius: 0px 20px 20px 0px;
+}
+.pagination-item-active{
+  color: white;
+  background-color: #6c5dd3;
+}
