@@ -7,10 +7,11 @@ import Upload from '../../Upload/Upload'
 import Apiservices from '../../../services/ApiServices'
 import { useDispatch, useSelector } from 'react-redux'
 import { actions } from '../../../Redux'
+import Loading from '../../loading/loading'
 export default function Add() {
   const [open, setOpen] = React.useState(false)
   const dispatch = useDispatch()
-
+  const [isloading, setIsLoading] = useState(false)
   const handleClickOpen = () => {
     setOpen(true)
   }
@@ -32,10 +33,13 @@ export default function Add() {
     requestBody.append('name[ar]', item.nameArabic)
     requestBody.append('image', base64Image)
     requestBody.append('sort', item.sort)
+    setIsLoading(true)
     Apiservices.post('/vendor/manufacturers', requestBody)
       .then((res) => {
         setOpen(false)
-        dispatch(actions.setIsUpdate())
+        setIsLoading(false)
+
+        // dispatch(actions.setIsUpdate())
         setItem({
           nameEnglish: '',
           nameArabic: '',
@@ -54,14 +58,21 @@ export default function Add() {
         variant="outlined"
         onClick={handleClickOpen}
       >
-{t("Add Manufacturer")}      </Button>
+        {t('Add Manufacturer')}{' '}
+      </Button>
       <Dialog
         fullWidth={true}
         maxWidth={'xs'}
         open={open}
         onClose={handleClose}
       >
-        <Stack dir={lang} component={'form'} gap={'20px'} p={'30px 20px'}>
+        <Stack
+          position={'relative'}
+          dir={lang}
+          component={'form'}
+          gap={'20px'}
+          p={'30px 20px'}
+        >
           <TextField
             sx={{
               borderRadius: '8px',
@@ -100,9 +111,14 @@ export default function Add() {
             variant="outlined"
           />
           <Upload base64Image={base64Image} setBase64Image={setBase64Image} />
-          <Button sx={{background:'#9d1111!important'}} onClick={handelAdd} variant="contained">
-           {t("Add Manufacturer")}
+          <Button
+            sx={{ background: '#9d1111!important' }}
+            onClick={handelAdd}
+            variant="contained"
+          >
+            {t('Add Manufacturer')}
           </Button>
+          {isloading && <Loading />}
         </Stack>
       </Dialog>
     </React.Fragment>

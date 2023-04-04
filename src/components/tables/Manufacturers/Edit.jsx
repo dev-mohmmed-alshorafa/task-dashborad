@@ -1,7 +1,13 @@
 import * as React from 'react'
 import Dialog from '@mui/material/Dialog'
 
-import { Button, IconButton, Stack, TextField } from '@mui/material'
+import {
+  Button,
+  CircularProgress,
+  IconButton,
+  Stack,
+  TextField,
+} from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import Apiservices from '../../../services/ApiServices'
 import { useState } from 'react'
@@ -9,6 +15,7 @@ import { useTranslation } from 'react-i18next'
 import Upload from '../../Upload/Upload'
 import { actions } from '../../../Redux'
 import { useDispatch, useSelector } from 'react-redux'
+import Loading from '../../loading/loading'
 export default function Edit({ id }) {
   const [open, setOpen] = React.useState(false)
 
@@ -40,8 +47,9 @@ export default function Edit({ id }) {
     })
   }, [])
   const dispatch = useDispatch()
-
+  const [isloading, setIsLoading] = useState(false)
   const handelEdit = () => {
+    setIsLoading(true)
     Apiservices.put(`/vendor/manufacturers/${id}`, {
       name: {
         ar: item.nameArabic,
@@ -51,6 +59,7 @@ export default function Edit({ id }) {
       sort: item.sort,
     })
       .then((res) => {
+        setIsLoading(false)
         setOpen(false)
         dispatch(actions.setIsUpdate())
       })
@@ -60,20 +69,25 @@ export default function Edit({ id }) {
 
   return (
     <React.Fragment>
-      <IconButton variant="outlined" onClick={handleClickOpen}>
-        <EditIcon sx={{ color: '#6c5dd3' }} />{' '}
-      </IconButton>
+      {isloading ? (
+        <CircularProgress />
+      ) : (
+        <IconButton variant="outlined" onClick={handleClickOpen}>
+          <EditIcon sx={{ color: '#6c5dd3' }} />{' '}
+        </IconButton>
+      )}
       <Dialog
         fullWidth={true}
         maxWidth={'xs'}
         open={open}
         onClose={handleClose}
       >
-        <Stack dir={lang}
+        <Stack
+          position={'relative'}
+          dir={lang}
           component={'form'}
           gap={'20px'}
           p={'30px 20px'}
-
         >
           <TextField
             sx={{
@@ -119,7 +133,9 @@ export default function Edit({ id }) {
             onClick={handelEdit}
             variant="contained"
           >
- {t("update")}          </Button>
+            {t('update')}{' '}
+          </Button>
+          {isloading && <Loading />}
         </Stack>
       </Dialog>
     </React.Fragment>

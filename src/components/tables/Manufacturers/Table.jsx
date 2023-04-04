@@ -28,7 +28,7 @@ export default function BasicTable({ table, pages }) {
     >
       <Stack
         sx={{
-          minWidth: 650,
+          minWidth: 850,
           background: 'var(--background-table)',
           position: 'relative',
           minHeight: '440px',

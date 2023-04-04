@@ -113,7 +113,7 @@ export default function Items() {
                   fontWeight: 'bold',
                 }}
               >
-                {user.full_name}
+                Admin
               </Typography>
               <Typography sx={{ color: 'white', fontSize: '12px' }}>
                 small

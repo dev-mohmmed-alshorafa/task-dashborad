@@ -38,6 +38,7 @@ body.dark{
 }
 body{
   background-color: var(--body-color);
+  overflow-x: hidden;
 }
 .nav-item{
   min-height: 0;

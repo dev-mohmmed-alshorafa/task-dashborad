@@ -81,7 +81,7 @@ export default function Manufacturers() {
 
   return (
     <Stack width={'100%'} mt={'20px'}>
-      <Stack m="30px 0" alignItems={'flex-end'}>
+      <Stack m={{sm:"30px 0",xs:'100px 0'}} alignItems={'flex-end'}>
         <Add />
       </Stack>
       <Stack
@@ -92,7 +92,7 @@ export default function Manufacturers() {
           background: 'var(--background-table)',
           marginTop: '40px',
           zIndex: '1',
-          margin: { xs: '90px 15px', sm: '20px 0' },
+          margin: { xs: '0px 15px', sm: '20px 0' },
         }}
       >
         <Table pages={pages && pages.total} table={tableInfo} />

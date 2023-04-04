@@ -71,7 +71,7 @@ export default function Controller() {
             fontWeight: 'bold',
           }}
         >
-          {user.full_name}
+          Admin
         </Typography>
         <Typography sx={{ color: 'var(--color-text)', fontSize: '12px' }}>
           Admin

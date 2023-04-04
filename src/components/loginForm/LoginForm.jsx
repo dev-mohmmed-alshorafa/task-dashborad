@@ -15,7 +15,7 @@ import { actions } from '../../Redux'
 import JwtService from '../../services/TokenServices'
 import { useTranslation } from 'react-i18next'
 import LangugeServices from '../../services/LangugeServices'
-function LoginForm() {
+function LoginForm({ setIsLoading }) {
   const [showPassword, setShowPassword] = React.useState(false)
   const handleClickShowPassword = () => setShowPassword((show) => !show)
   const handleMouseDownPassword = (event) => {
@@ -32,12 +32,14 @@ function LoginForm() {
   const dispatch = useDispatch()
   const handelLogin = (e) => {
     e.preventDefault()
+    setIsLoading(true)
     Apiservices.post('/vendor/login', login).then((res) => {
       if (res.data.data.token) {
         LangugeServices.setLang('en')
         JwtService.setToken(res.data.data.token)
         dispatch(actions.login(res.data.data))
         setLogin(i)
+        setIsLoading(false)
       }
     })
   }

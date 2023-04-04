@@ -1,9 +1,12 @@
 import { Container, Stack } from '@mui/material'
 import React from 'react'
 import { LoginForm } from '../components'
+import Loading from '../components/loading/loading'
+import { useState } from 'react'
 export default function Login() {
+  const [isLoading,setIsLoading]=useState(false)
   return (
-    <Stack height={'100vh'} justifyContent={'center'}>
+    <Stack position={'relative'} height={'100vh'} justifyContent={'center'}>
       <Container maxWidth="sm">
         <Stack gap={'20px'} width={'100%'} alignItems={'center'}>
           <img
@@ -11,9 +14,10 @@ export default function Login() {
             src="https://logos-world.net/wp-content/uploads/2020/04/Huawei-Logo-700x394.png"
             alt=""
           />
-          <LoginForm/>
+          <LoginForm setIsLoading={setIsLoading} />
         </Stack>
       </Container>
+     {isLoading && <Loading />} 
     </Stack>
   )
 }
