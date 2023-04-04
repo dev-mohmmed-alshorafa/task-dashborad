@@ -12,7 +12,7 @@ function Data() {
       {
         icon: './icons/users.png',
         name: t('Manufacturers'),
-        path: '/Test-Table',
+        path: '/Manufacturers',
       },
     ],
   }

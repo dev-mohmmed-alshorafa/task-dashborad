@@ -15,7 +15,7 @@ const router = createHashRouter([
     element: <App />,
     children: [
       { index: true, element: <Charts /> },
-      { path: '/Test-Table', element: <Manufacturers /> },
+      { path: '/Manufacturers', element: <Manufacturers /> },
     ],
     // errorElement: <NotFound />,
   },

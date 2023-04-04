@@ -12,7 +12,6 @@ export default function Row() {
     t('status'),
     t('actions'),
   ]
-  console.log(headRow)
   return (
     <Stack
       sx={{

@@ -3,11 +3,12 @@ import React from 'react'
 import Edit from './Edit'
 import Delete from './Delete'
 
-export default function Actions({ item }) {
+export default function Actions({ item,setItem ,setIsDeleted}) {
+  
   return (
     <Stack justifyContent={'center'} direction={'row'} width={'150px'}>
-      <Edit id={item.id}/>
-      <Delete id={item.id} />
+      <Edit setEle={setItem} id={item.id}/>
+      <Delete setIsDeleted={setIsDeleted}  id={item.id} />
     </Stack>
   )
 }

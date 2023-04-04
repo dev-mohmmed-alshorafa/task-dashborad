@@ -5,7 +5,7 @@ import Apiservices from '../../../services/ApiServices'
 const label = { inputProps: { 'aria-label': 'Color switch demo' } }
 
 export default function ColorSwitches({ status }) {
-  const [state, setState] = React.useState(status.status === 1 ? true : false)
+  const [state, setState] = React.useState(status.status === 0 ? false : true)
   const handleChange = (event) => {
     setState(event.target.checked)
     console.log(state)

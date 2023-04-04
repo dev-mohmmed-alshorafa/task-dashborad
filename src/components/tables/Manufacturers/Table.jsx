@@ -11,11 +11,14 @@ import Row from './HeadRow'
 import TestTable from './BodyTable'
 import UsePagination from '../../table/Pagination'
 import { useTranslation } from 'react-i18next'
-
+import { useSelector } from 'react-redux'
+import Rows from '../../skeleton/Rows'
 
 export default function BasicTable({ table, pages }) {
   const { t } = useTranslation()
+  const isUpdate = useSelector((state) => state.isUpdate)
 
+  
   return (
     <TableContainer
       sx={{
@@ -42,7 +45,7 @@ export default function BasicTable({ table, pages }) {
         >
           <Stack>
             <Stack gap={'10px'} alignItems={'center'} direction={'row'}>
-              <img style={{ width: '27px' }} src={table.img} alt="" />
+              {/* <img style={{ width: '27px' }} src={table.img} alt="" /> */}
               <Typography
                 sx={{
                   color: 'var(--color-text)',
@@ -60,14 +63,17 @@ export default function BasicTable({ table, pages }) {
                   marginTop: '7px',
                 }}
               >
-                {pages} {t("item")}
+                {pages} {t('item')}
               </Typography>
             </Stack>
           </Stack>
 
           <Stack mb={'20px'} overflow={'scroll'}>
-            <Row headRow={table.headRow} />
-            <TestTable bodyRows={table.bodyRows} />
+            <Row />
+            {
+              !isUpdate ?<TestTable  />: <Rows/>
+
+            }
           </Stack>
         </Stack>
       </Stack>

@@ -9,10 +9,10 @@ import { CircularProgress, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Apiservices from '../../../services/ApiServices'
 import { actions } from '../../../Redux'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
-export default function Delete({ id }) {
+export default function Delete({ id, setIsDeleted }) {
   const [open, setOpen] = React.useState(false)
   const dispatch = useDispatch()
 
@@ -28,8 +28,8 @@ export default function Delete({ id }) {
   const handelDelete = () => {
     setIsloading(true)
     Apiservices.delete(`/vendor/manufacturers/${id}`).then((res) => {
-      dispatch(actions.setIsUpdate())
       setIsloading(false)
+      setIsDeleted(true)
     })
     setOpen(false)
   }

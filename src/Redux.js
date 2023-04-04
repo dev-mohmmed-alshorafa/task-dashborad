@@ -7,7 +7,9 @@ const countSlice = createSlice({
     lang: 'ltr',
     search: '',
     isUpdate: false,
-    activeLink:0
+    activeLink: 0,
+    isSearch: false,
+    Manufacturers:[]
   },
   reducers: {
     changeMode(state, action) {
@@ -25,8 +27,14 @@ const countSlice = createSlice({
     setIsUpdate(state, action) {
       state.isUpdate = !state.isUpdate
     },
-    setActiveLink(state, action){
-      state.activeLink=action.payload
+    setActiveLink(state, action) {
+      state.activeLink = action.payload
+    },
+    setIsSearch(state, action) {
+      state.isSearch = !state.isSearch
+    },
+    setManufacturers(state, action) {
+      state.Manufacturers = action.payload
     }
   },
 })

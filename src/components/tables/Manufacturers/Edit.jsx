@@ -16,7 +16,7 @@ import Upload from '../../Upload/Upload'
 import { actions } from '../../../Redux'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../../loading/loading'
-export default function Edit({ id }) {
+export default function Edit({ id, setEle }) {
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -37,15 +37,17 @@ export default function Edit({ id }) {
     image: '',
   })
   React.useEffect(() => {
-    Apiservices.get(`/vendor/manufacturers/${id}`).then((res) => {
-      setItem({
-        nameEnglish: res.data.data.name.en,
-        nameArabic: res.data.data.name.ar,
-        sort: res.data.data.sort_order,
-        image: res.data.data.image,
+    if (open) {
+      Apiservices.get(`/vendor/manufacturers/${id}`).then((res) => {
+        setItem({
+          nameEnglish: res.data.data.name.en,
+          nameArabic: res.data.data.name.ar,
+          sort: res.data.data.sort_order,
+          image: res.data.data.image,
+        })
       })
-    })
-  }, [])
+    }
+  }, [open])
   const dispatch = useDispatch()
   const [isloading, setIsLoading] = useState(false)
   const handelEdit = () => {
@@ -59,9 +61,9 @@ export default function Edit({ id }) {
       sort: item.sort,
     })
       .then((res) => {
+        setEle(res.data.data)
         setIsLoading(false)
         setOpen(false)
-        dispatch(actions.setIsUpdate())
       })
       .catch((err) => console.log(err))
   }

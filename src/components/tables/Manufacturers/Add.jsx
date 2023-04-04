@@ -8,9 +8,11 @@ import Apiservices from '../../../services/ApiServices'
 import { useDispatch, useSelector } from 'react-redux'
 import { actions } from '../../../Redux'
 import Loading from '../../loading/loading'
-export default function Add() {
+export default function Add({ total }) {
   const [open, setOpen] = React.useState(false)
   const dispatch = useDispatch()
+  const Manufacturers = useSelector((state) => state.Manufacturers)
+
   const [isloading, setIsLoading] = useState(false)
   const handleClickOpen = () => {
     setOpen(true)
@@ -37,9 +39,12 @@ export default function Add() {
     Apiservices.post('/vendor/manufacturers', requestBody)
       .then((res) => {
         setOpen(false)
+        if (total > Manufacturers.length) {
+          console.log(res.data.data)
+          dispatch(actions.setManufacturers([...Manufacturers, res.data.data]))
+        }
         setIsLoading(false)
 
-        // dispatch(actions.setIsUpdate())
         setItem({
           nameEnglish: '',
           nameArabic: '',

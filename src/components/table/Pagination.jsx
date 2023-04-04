@@ -4,17 +4,48 @@ import {
   Pagination,
 } from 'pagination-react-js'
 import { useEffect } from 'react'
+import Apiservices from '../../services/ApiServices'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { actions } from '../../Redux'
 
-const App = ({ pages, setPage }) => {
-  const { currentPage, entriesPerPage, entries } = usePagination(1, 3)
-  console.log(pages * 10)
+const App = ({ pages, count, setPages }) => {
+  const { currentPage, entriesPerPage } = usePagination(1, 3)
+  const search = useSelector((state) => state.search)
+  const isSearch = useSelector((state) => state.isSearch)
+  const dispatch = useDispatch()
+
   const dataList = generateTestData(pages * 2.5, (i) => ({
     id: `Id${i}`,
     name: `Name${i}`,
   }))
   useEffect(() => {
-    setPage(currentPage.get)
-  }, [currentPage])
+    if (search === '') {
+      console.log(1)
+      dispatch(actions.setIsUpdate())
+
+      Apiservices.get(
+        `/vendor/manufacturers?per_page=${count}&page=${currentPage.get}`,
+      ).then((res) => {
+        setPages(res.data.pages)
+        console.log(res.data.data)
+        dispatch(actions.setManufacturers(res.data.data))
+        dispatch(actions.setIsUpdate())
+      })
+    } else {
+      console.log(2)
+      dispatch(actions.setIsUpdate())
+
+      Apiservices.get(
+        `/vendor/manufacturers?per_page=${count}&search=${search}&page=1  `,
+      ).then((res) => {
+        setPages(res.data.pages)
+        console.log(res.data.data)
+        dispatch(actions.setManufacturers(res.data.data))
+        dispatch(actions.setIsUpdate())
+      })
+    }
+  }, [currentPage.get, isSearch])
   return (
     <div className="container">
       <Pagination

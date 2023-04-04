@@ -1,17 +1,32 @@
 import { FormControl, IconButton, TextField } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import SearchIcon from '@mui/icons-material/Search'
 import { useDispatch, useSelector } from 'react-redux'
 import { actions } from '../../Redux'
 import { useTranslation } from 'react-i18next'
+import debounce from 'lodash.debounce'
+
 export default function Search() {
   const search = useSelector((state) => state.search)
   const dispatch = useDispatch()
-  const handelSearch = (e) => {
-    dispatch(actions.setSearch(e.target.value))
-  }
-  const { t } = useTranslation()
 
+  const [timerId, setTimerId] = useState(null)
+
+  const handleSearchChange = useCallback(
+    (e) => {
+      dispatch(actions.setSearch(e.target.value))
+      if (timerId) {
+        clearTimeout(timerId)
+      }
+      setTimerId(
+        setTimeout(() => {
+          console.log('Send request for:', e.target.value)
+          dispatch(actions.setIsSearch())
+        }, 500),
+      )
+    },
+    [timerId],
+  )
   return (
     <form style={{ display: 'flex', color: '#8074d9' }}>
       <IconButton sx={{ maxHeight: '40px' }}>
@@ -19,8 +34,7 @@ export default function Search() {
       </IconButton>{' '}
       <input
         value={search}
-        onChange={handelSearch}
-        placeholder={t("search")}
+        onChange={handleSearchChange}
         // color={mode && 'secondary'}
         style={{
           border: 'none ',
